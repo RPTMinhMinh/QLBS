@@ -1,0 +1,16 @@
+export interface Book {
+    id:number,
+    code:string,
+    name:string,
+    author: string,
+    price:number,
+    importPrice: number,
+    quantity: number,
+    discount: number,
+    description: string,
+    categoryId: number,
+    categoryName: string,
+    publisherId: number,
+    publisherName:string,
+    imageUrl: string,
+}
