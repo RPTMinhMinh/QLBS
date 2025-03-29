@@ -60,7 +60,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/account/findByCondition", "api/account/count-account").hasAnyRole("ADMIN")
                                 .requestMatchers("/api/order/create").hasAnyRole( "CUSTOMER")
                                 .requestMatchers("/api/order-detail").hasAnyRole( "CUSTOMER")
-                                .requestMatchers("api/order//count-order").hasAnyRole("ADMIN")
+                                .requestMatchers("api/order/count-order").hasAnyRole("ADMIN")
                                 .requestMatchers("api/revenue/list").hasAnyRole("ADMIN")
                                 .anyRequest().authenticated()
                 );

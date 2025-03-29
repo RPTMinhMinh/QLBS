@@ -11,12 +11,19 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import vn.edu.hunre.qlbs.config.MomoConfig;
 import vn.edu.hunre.qlbs.config.VNPAYConfig;
 import vn.edu.hunre.qlbs.config.ZaloPayConfig;
+import vn.edu.hunre.qlbs.entity.PaymentEntity;
+import vn.edu.hunre.qlbs.mapper.PaymentMethodMapper;
+import vn.edu.hunre.qlbs.model.dto.PaymentMethodDto;
+import vn.edu.hunre.qlbs.model.response.BaseResponse;
 import vn.edu.hunre.qlbs.model.response.VNPayResponse;
+import vn.edu.hunre.qlbs.repository.PaymentRepository;
 import vn.edu.hunre.qlbs.service.IPaymentService;
+import vn.edu.hunre.qlbs.utils.Constant;
 import vn.edu.hunre.qlbs.utils.VNPayUtil;
 import vn.edu.hunre.qlbs.utils.crypto.HMACUtil;
 
@@ -30,12 +37,30 @@ import java.util.*;
 
 @Service
 public class IPaymentServiceImpl implements IPaymentService {
+
     @Autowired
     private VNPAYConfig vnPayConfig;
     @Autowired
     private MomoConfig momoConfig;
     @Autowired
     private ZaloPayConfig zaloPayConfig;
+    @Autowired
+    private PaymentRepository paymentRepository;
+    @Autowired
+    private PaymentMethodMapper paymentMethodMapper;
+
+    @Override
+    public BaseResponse<PaymentMethodDto> addPaymentMethod(PaymentMethodDto paymentMethod) {
+        BaseResponse<PaymentMethodDto> response = new BaseResponse<>();
+        PaymentEntity payment = paymentMethodMapper.toEntity(paymentMethod);
+        payment.setDeleted(false);
+        paymentRepository.save(payment);
+        response.setMessage(Constant.HTTP_MESSAGE.SUCCESS);
+        response.setCode(HttpStatus.OK.value());
+        response.setData(paymentMethodMapper.toDto(payment));
+        return response;
+    }
+
 
     public VNPayResponse createVnPayment(HttpServletRequest request) {
         long amount = Integer.parseInt(request.getParameter("amount")) * 100L;

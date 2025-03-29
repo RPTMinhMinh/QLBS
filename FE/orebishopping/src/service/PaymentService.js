@@ -3,6 +3,11 @@ import axiosInstance from "../route/interceptor";
 
 const api = 'http://localhost:8080/api/payment';
 
+async function createPaymentMethod(req){
+    const response = await axiosInstance.post(`${api}/create`, req);
+    return response.data;
+}
+
 //VNPAY
 async function createVNPay(amount,bankCode) {
     try {
@@ -44,4 +49,4 @@ async function getOrderStatus(req) {
     return response.data;
 }
 
-export default { createVNPay, handleVNPayReturn, momoPayment, checkPaymentStatus, createZaloPay, getOrderStatus };
+export default { createVNPay, handleVNPayReturn, momoPayment, checkPaymentStatus, createZaloPay, getOrderStatus, createPaymentMethod };

@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import vn.edu.hunre.qlbs.model.dto.PaymentMethodDto;
 import vn.edu.hunre.qlbs.model.request.MomoRequest;
+import vn.edu.hunre.qlbs.model.response.BaseResponse;
 import vn.edu.hunre.qlbs.model.response.VNPayResponse;
 import vn.edu.hunre.qlbs.service.IPaymentService;
 
@@ -16,6 +18,13 @@ import java.util.Map;
 public class ApiPayment {
     @Autowired
     private IPaymentService paymentService;
+
+    @PostMapping("/create")
+    public ResponseEntity<BaseResponse<PaymentMethodDto>> create(@RequestBody PaymentMethodDto paymentMethodDto){
+        BaseResponse<PaymentMethodDto> response = paymentService.addPaymentMethod(paymentMethodDto);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/vn-pay")
     public VNPayResponse pay(HttpServletRequest request) {
         return paymentService.createVnPayment(request);

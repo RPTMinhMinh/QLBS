@@ -32,11 +32,13 @@ export const OrderList = () => {
   function getAllOrders() {
     getAll(currentPage, itemsPerPage)
       .then((response: any) => {
+        console.log(response.content);
         setOrders(response.content);
         setTotalOrder(response.totalElements);
       })
       .catch((e: any) => console.error(e));
   }
+
   useEffect(() => {
     getData();
   }, [currentPage, itemsPerPage]);
@@ -103,10 +105,10 @@ export const OrderList = () => {
 
 
 
-  const handleUpdate = (id:number, newStatus:string) => {
+  const handleUpdate = (id: number, newStatus: string) => {
     // Tạo một bản sao của data với status mới
     const updatedData = { ...data, status: newStatus };
-  
+
     // Gọi API để cập nhật đơn hàng
     updateOrder(id, updatedData)
       .then(() => {
@@ -161,11 +163,11 @@ export const OrderList = () => {
             onChange={(e) => setParam({ ...param, status: e.target.value })}
             className="w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-4 text-black outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
             <option>Chọn Trạng thái</option>
-            <option value="Đã giao">Đã giao</option>
+            <option value="Đã giao hàng">Đã giao hàng</option>
             <option value="Đang giao hàng">Đang giao hàng</option>
             <option value="Chờ xác nhận">Chờ xác nhận</option>
             <option value="Chờ lấy hàng">Chờ lấy hàng</option>
-            <option value="Đã hủy">Đã hủy</option>  
+            <option value="Đã hủy">Đã hủy</option>
           </select>
         </div>
 
@@ -204,19 +206,18 @@ export const OrderList = () => {
                     <td className="py-4 px-6">{order.accountName}</td>
                     <td className="py-4 px-6">
                       <select
-                        onChange={(e) => {
-                          setData({ ...data, status: e.target.value });
-                          handleUpdate(order.id, e.target.value); // Gọi handleUpdate với giá trị mới
-                        }}
-                        value={order.status}
+                        onChange={(e) => handleUpdate(order.id, e.target.value)}
+                        value={order.status} // Đảm bảo trạng thái luôn phản ánh dữ liệu thực tế
                         className="form-select block w-full border rounded p-2 text-gray-700 font-medium text-sm"
                       >
-                        <option value="Đã giao">Đã giao</option>
+                        <option value="Đã giao hàng">Đã giao hàng</option>
                         <option value="Đang giao hàng">Đang giao hàng</option>
-                        <option value="Đã hủy">Đã hủy</option>
+                        <option value="Chờ lấy hàng">Chờ lấy hàng</option>
                         <option value="Chờ xác nhận">Chờ xác nhận</option>
+                        <option value="Đã hủy">Đã hủy</option>
                       </select>
                     </td>
+
                     <td className="py-4 px-4 flex gap-4">
                       <button className="text-yellow-600 hover:text-yellow-800 transition">
                         <Eye
@@ -255,92 +256,92 @@ export const OrderList = () => {
       </div>
 
       {modalOpen && (
-  <div
-    className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50"
-    onClick={(e) => {
-      if (e.target === e.currentTarget) {
-        setModalOpen(false);
-      }
-    }}
-  >
-    <div className="bg-white p-6 rounded-xl shadow-xl w-[1000px] relative">
-      <button
-        onClick={() => setModalOpen(false)}
-        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+        <div
+          className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setModalOpen(false);
+            }
+          }}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
-
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                STT
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Tên sản phẩm
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Số lượng
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Giá
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {orderDetail.map((product, index) => (
-              <tr key={product.id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{index + 1}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{product.bookDto.name}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{product.quantity}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{product.price}</div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr className="border-t-2 border-gray-300">
-              <td
-                colSpan={3}
-                className="py-4 px-6 font-semibold text-right"
+          <div className="bg-white p-6 rounded-xl shadow-xl w-[1000px] relative">
+            <button
+              onClick={() => setModalOpen(false)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Tổng tiền:
-              </td>
-              <td className=" text-lg font-bold text-red-600">
-                {orderDetail.reduce((total, item) => {
-                  const itemTotal = item.price * item.quantity;
-                  return total + itemTotal;
-                }, 0)}
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-  </div>
-)}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      STT
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Tên sản phẩm
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Số lượng
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Giá
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {orderDetail.map((product, index) => (
+                    <tr key={product.id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{index + 1}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{product.bookDto.name}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{product.quantity}</div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900">{product.price}</div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr className="border-t-2 border-gray-300">
+                    <td
+                      colSpan={3}
+                      className="py-4 px-6 font-semibold text-right"
+                    >
+                      Tổng tiền:
+                    </td>
+                    <td className=" text-lg font-bold text-red-600">
+                      {orderDetail.reduce((total, item) => {
+                        const itemTotal = item.price * item.quantity;
+                        return total + itemTotal;
+                      }, 0)}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

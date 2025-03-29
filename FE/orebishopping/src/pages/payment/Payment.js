@@ -4,7 +4,7 @@ import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { BiChevronDown, BiChevronsDown, BiShoppingBag, BiUser } from "react-icons/bi";
 import { useCart } from "../../redux/CartContext";
 import { formatPrice } from "../../constants/constant";
-import AuthService from "../../service/AuthService.js";
+import { useAuth } from '../../service/AuthService';
 import pay from "../../service/PaymentService.js";
 import { addOrder, addOrderDetail } from "../../service/OrderDetail.js";
 import { checkLoyalCustomer } from "../../service/AccountService.js";
@@ -22,7 +22,7 @@ const Payment = () => {
   const finalTotal = loyalCustomer ? (totalAmt + shippingFee) * 0.85 : totalAmt + shippingFee;
   const discountAmount = loyalCustomer ? (totalAmt + shippingFee) * 0.15 : 0;
   const [address, setAddress] = useState('');
-
+  const { getUser } = useAuth();
 
   useEffect(() => {
     let price = 0;
@@ -38,7 +38,7 @@ const Payment = () => {
 
 
   useEffect(() => {
-    AuthService.getUser().then((res) => {
+    getUser().then((res) => {
       setUser(res.data);
       console.log(res.data);
     }).catch((e) => console.error(e));
@@ -55,11 +55,13 @@ const Payment = () => {
       alert("Vui lòng nhập địa chỉ nhận hàng");
       return;
     }
-
+    localStorage.setItem('paymentMethod', paymentMethod)
+    localStorage.setItem("shippingAddress", address);
     if (paymentMethod === "vnpay") {
+      
       const amount = finalTotal;
       try {
-        localStorage.setItem("shippingAddress", address); 
+         
         const response = await pay.createVNPay(amount, "NCB");
         if (response && response.paymentUrl) {
           window.location.href = response.paymentUrl;
@@ -99,7 +101,6 @@ const Payment = () => {
       const total = finalTotal.toString();
       const amount = { "amount": total };
       try {
-        localStorage.setItem("shippingAddress", address); 
         const response = await pay.momoPayment(amount);
         localStorage.setItem('orderId', response.orderId);
         if (response && response.payUrl) {
@@ -112,10 +113,8 @@ const Payment = () => {
       }
 
     } else if (paymentMethod === "zalopay") {
-      
       const amount = { "amount": finalTotal };
       try {
-        localStorage.setItem("shippingAddress", address); 
         const response = await pay.createZaloPay(amount);
         if (response && response.order_url) {
           window.location.href = response.order_url;
