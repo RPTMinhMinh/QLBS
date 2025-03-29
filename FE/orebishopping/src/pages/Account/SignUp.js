@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link, useNavigate, useRoutes } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoLight } from "../../assets/images";
-import { useDispatch } from "react-redux";
-import api from '../../service/AuthService'
+import { useAuth } from '../../service/AuthService';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({ fullname: '', email: '', phone: '', password: '', "roleIds": [3] });
   const [message, setMessage] = useState('');
   const [dataOtp, setDataOtp] = useState({ verificationCode: '', registerUserDto: '' });
   const [isOtpModalVisible, setIsOtpModalVisible] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate(); // Sử dụng useNavigate thay vì useRoutes
+  const navigate = useNavigate();
+  const { signUp, verifyOtp, resend } = useAuth();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -21,7 +20,6 @@ const SignUp = () => {
       return updatedFormData;
     });
   };
-  
 
   const verificationCode = (e) => {
     const { id, value } = e.target;
@@ -31,9 +29,8 @@ const SignUp = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    // console.log(formData);
     document.getElementById("btnSignup").disabled = true;
-    api.signUp(formData).then((response) => {
+    signUp(formData).then((response) => {
       if (response.code === 200) {
         setIsOtpModalVisible(true);
       } else {
@@ -44,17 +41,16 @@ const SignUp = () => {
 
   const handleOtpSubmit = (e) => {
     e.preventDefault();
-    api.verifyOtp(dataOtp).then((response) => {
+    verifyOtp(dataOtp).then((response) => {
       if (response === "Account verified successfully") {
-        navigate("/signin"); // Sử dụng navigate để chuyển hướng
+        navigate("/signin");
       }
     });
   };
 
   const resendCode = () => {
-    api.resendCode(formData.email);
+    resend(formData.email);
   };
-
 
   return (
     <div className="w-full h-screen flex items-center justify-start">
@@ -109,20 +105,6 @@ const SignUp = () => {
         </div>
       </div>
       <div className="w-full lgl:w-[500px] h-full flex flex-col justify-center">
-
-        {/* <div className="w-[500px]">
-            <p className="w-full px-4 py-10 text-green-500 font-medium font-titleFont">
-            </p>
-            <Link to="/signin">
-              <button
-                className="w-full h-10 bg-primeColor rounded-md text-gray-200 text-base font-titleFont font-semibold 
-            tracking-wide hover:bg-black hover:text-white duration-300"
-              >
-                Đăng Kí
-              </button>
-            </Link>
-          </div> */}
-
         <>
           <form
             onSubmit={handleSignUp}
@@ -146,12 +128,6 @@ const SignUp = () => {
                     placeholder="Nhập họ tên"
                     required
                   />
-                  {/* {errClientName && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errClientName}
-                    </p>
-                  )} */}
                 </div>
                 {/* Email */}
                 <div className="flex flex-col gap-.5">
@@ -166,12 +142,6 @@ const SignUp = () => {
                     type="email"
                     placeholder="Nhập email"
                   />
-                  {/* {errEmail && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errEmail}
-                    </p>
-                  )} */}
                 </div>
                 {/* Phone Number */}
                 <div className="flex flex-col gap-.5">
@@ -186,12 +156,6 @@ const SignUp = () => {
                     type="text"
                     placeholder="Nhập số điện thoại"
                   />
-                  {/* {errPhone && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errPhone}
-                    </p>
-                  )} */}
                 </div>
                 {/* Password */}
                 <div className="flex flex-col gap-.5">
@@ -207,12 +171,6 @@ const SignUp = () => {
                     placeholder="Tạo mật khẩu"
                     maxLength={50}
                   />
-                  {/* {errPassword && (
-                    <p className="text-sm text-red-500 font-titleFont font-semibold px-4">
-                      <span className="font-bold italic mr-1">!</span>
-                      {errPassword}
-                    </p>
-                  )} */}
                 </div>
 
                 <button
