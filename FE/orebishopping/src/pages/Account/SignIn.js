@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logoLight } from "../../assets/images";
-import { useAuth } from '../../service/AuthService';
+import api from '../../service/AuthService';
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -10,24 +10,20 @@ const SignIn = () => {
   const [error, setError] = useState({
     email: '',
     password: ''
-  });
-  const { login, decode } = useAuth();
-
+  })
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
-
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       if (isValid()) {
-        const response = await login({ email, password });
+        const response = await api.login({ email, password });
         localStorage.setItem("token", response.token);
-        const decodeToken = await decode();
+        const decodeToken = await api.decode();
         const roleArr = decodeToken.roles;
         const token = response.token;
         for (const roleKey of roleArr) {
@@ -41,27 +37,26 @@ const SignIn = () => {
     } catch (error) {
       console.error(error);
     }
+    function isValid() {
+      let valid = true;
+      const errorCopy = { email: "", password: "" };
+
+      if (!email.trim()) {
+        errorCopy.email = "Email không được để trống";
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorCopy.email = "Email không hợp lệ";
+        valid = false;
+      }
+      if (!password.trim()) {
+        errorCopy.password = "Mật khẩu không được để trống";
+        valid = false;
+      }
+      setError(errorCopy);
+      return valid;
+    }
   };
 
-  const isValid = () => {
-    let valid = true;
-    const errorCopy = { email: "", password: "" };
-
-    if (!email.trim()) {
-      errorCopy.email = "Email không được để trống";
-      valid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errorCopy.email = "Email không hợp lệ";
-      valid = false;
-    }
-    if (!password.trim()) {
-      errorCopy.password = "Mật khẩu không được để trống";
-      valid = false;
-    }
-    setError(errorCopy);
-    return valid;
-  };
-  
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="w-1/2 hidden lgl:inline-flex h-full text-white">

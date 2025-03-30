@@ -15,7 +15,7 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
     @Query("SELECT b FROM BookEntity b WHERE b.deleted = false")
     Page<BookEntity> getAllBooks(Pageable pageable);
-    @Query("SELECT b FROM BookEntity b WHERE " +
+    @Query("SELECT b FROM BookEntity b WHERE b.deleted = false and " +
             "(:code IS NULL OR b.code LIKE %:code%) AND " +
             "(:name IS NULL OR b.name LIKE %:name%) AND " +
             "(:author IS NULL OR b.author LIKE %:author%) AND " +

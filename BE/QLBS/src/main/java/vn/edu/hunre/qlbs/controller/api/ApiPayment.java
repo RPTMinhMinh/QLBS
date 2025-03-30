@@ -25,6 +25,12 @@ public class ApiPayment {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("show-payment-method/{orderId}")
+    public ResponseEntity<BaseResponse<PaymentMethodDto>> showPaymentMethod(@PathVariable(value = "orderId") Long orderId){
+        BaseResponse<PaymentMethodDto> response = paymentService.showPaymentMethod(orderId);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/vn-pay")
     public VNPayResponse pay(HttpServletRequest request) {
         return paymentService.createVnPayment(request);

@@ -114,7 +114,7 @@ export const AddBook = () => {
                     type="number"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
-                    placeholder="Nhập giá khóa học"
+                    placeholder="Nhập giá sách bán"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {/* {error.price && <div className='invalid-feedback'>{error.price}</div>} */}
@@ -127,7 +127,7 @@ export const AddBook = () => {
                     type="number"
                     value={importPrice}
                     onChange={(e) => setImportPrice(e.target.value)}
-                    placeholder="Nhập giá khóa học"
+                    placeholder="Nhập giá nhập vào"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {/* {error.discount && <div className='invalid-feedback'>{error.discount}</div>} */}
@@ -142,7 +142,7 @@ export const AddBook = () => {
                     type="number"
                     value={discount}
                     onChange={(e) => setDiscount(e.target.value)}
-                    placeholder="Nhập giá khóa học"
+                    placeholder="Nhập giảm giá sách"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {/* {error.discount && <div className='invalid-feedback'>{error.discount}</div>} */}
@@ -155,7 +155,7 @@ export const AddBook = () => {
                     type="number"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
-                    placeholder="Nhập giá khóa học"
+                    placeholder="Nhập số lượng sách"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                   />
                   {/* {error.discount && <div className='invalid-feedback'>{error.discount}</div>} */}

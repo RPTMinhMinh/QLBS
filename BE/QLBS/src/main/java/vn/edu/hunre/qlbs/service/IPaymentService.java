@@ -9,6 +9,7 @@ import java.util.Map;
 
 public interface IPaymentService {
     BaseResponse<PaymentMethodDto> addPaymentMethod(PaymentMethodDto paymentMethod);
+    BaseResponse<PaymentMethodDto> showPaymentMethod(Long orderId);
     //vnpay
     VNPayResponse createVnPayment(HttpServletRequest request);
 

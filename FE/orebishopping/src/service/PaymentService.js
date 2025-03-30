@@ -8,6 +8,11 @@ async function createPaymentMethod(req){
     return response.data;
 }
 
+async function showPaymentMethod(req){
+    const response = await axiosInstance.get(`${api}/show-payment-method/${req}`);
+    return response.data;
+}
+
 //VNPAY
 async function createVNPay(amount,bankCode) {
     try {
@@ -49,4 +54,4 @@ async function getOrderStatus(req) {
     return response.data;
 }
 
-export default { createVNPay, handleVNPayReturn, momoPayment, checkPaymentStatus, createZaloPay, getOrderStatus, createPaymentMethod };
+export default { createVNPay, handleVNPayReturn, momoPayment, checkPaymentStatus, createZaloPay, getOrderStatus, createPaymentMethod, showPaymentMethod };

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Publisher } from '../../types/Publisher';
 import { addPublisher, deletePublisher, findByIdPublisher, getAllPublisher, updatePublisher } from '../../service/PublisherService';
 import { confirmDelete } from '../../utils/ConfirmationDialog';
+import { toast, ToastContainer } from 'react-toastify';
 
 export const PublisherList = () => {
 
@@ -74,7 +75,7 @@ export const PublisherList = () => {
       updatePublisher(Number(data.id), data).then(() => {
         setModalOpen(false);
         getAllPublishers();
-        alert("Cập nhật nhà xuất bản thành công!");
+        toast.success("Cập nhật nhà xuất bản thành công!");
         setData({id: 0,
           code: '',
           name: '',
@@ -82,7 +83,7 @@ export const PublisherList = () => {
       }).catch((error: any) => console.error(error));
     }else{
       addPublisher(data).then(()=>{
-        alert("Thêm nhà xuất bản thành công!");
+        toast.success("Thêm nhà xuất bản thành công!");
         setModalOpen(false);
         setData({id: 0,
           code: '',
@@ -96,6 +97,7 @@ export const PublisherList = () => {
   return (
     <>
       <Breadcrumb pageName='Danh sách nhà xuất bản' />
+      <ToastContainer />
       <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700" style={{ width: 150, marginBottom: 10 }} onClick={() => {setIsEditting(false); setModalOpen(true); }} >Thêm nhà xuất bản</button>
       <div className="flex flex-col gap-10">
         <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../service/AuthService';
+import api from '../../service/AuthService'
 import { changePassword, updateAccount } from '../../service/AccountService';
 import { showLoadingThenExecute } from '../../constants/swals';
 
@@ -18,10 +18,9 @@ export const Profile = () => {
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [file, setFile] = useState(null);
-    const { getUser } = useAuth();
 
     useEffect(() => {
-        getUser().then((res) => {
+        api.getUser().then((res) => {
             setData(res.data);
         }).catch((e) => console.error(e));
     }, []);

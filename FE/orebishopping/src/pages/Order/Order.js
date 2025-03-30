@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Breadcrumbs from '../../components/pageProps/Breadcrumbs'
 import { getAllOrders, getOrderByEmail, getOrderDetail } from '../../service/OrderDetail';
 import { formatPrice } from '../../constants/constant';
+import api from '../../service/PaymentService'
 
 import { MdRemoveRedEye } from 'react-icons/md';
 
@@ -12,6 +13,7 @@ export const Order = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalOrder, setTotalOrder] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   useEffect(() => {
     getOrderByEmail(currentPage, items)
@@ -29,6 +31,7 @@ export const Order = () => {
     }
   };
 
+
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
@@ -44,6 +47,10 @@ export const Order = () => {
     getOrderDetail(orderId).then((res) => {
       setOrderDetail(res.content);
     }).catch((e) => console.error(e))
+    api.showPaymentMethod(orderId).then((res) => {
+      // console.log(res.data);
+      setPaymentMethod(res.data);
+    })
     setIsModalOpen(true);
   };
 
@@ -69,6 +76,9 @@ export const Order = () => {
                   Ngày đặt hàng
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Địa chỉ
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Trạng thái
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -87,6 +97,9 @@ export const Order = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {order.createDate}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {order.address}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
@@ -179,6 +192,9 @@ export const Order = () => {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">
                         Giá tiền
                       </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500">
+                        PTTT
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
@@ -205,11 +221,13 @@ export const Order = () => {
                         <td className="px-6 py-4 whitespace-nowrap">
                           {formatPrice(orderDetail.price)}
                         </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {paymentMethod.paymentMethod.toUpperCase()}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-
               )}
               <div className="mt-4 flex justify-end">
                 <span className=" text-lg">

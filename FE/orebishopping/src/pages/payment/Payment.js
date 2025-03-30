@@ -4,7 +4,7 @@ import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { BiChevronDown, BiChevronsDown, BiShoppingBag, BiUser } from "react-icons/bi";
 import { useCart } from "../../redux/CartContext";
 import { formatPrice } from "../../constants/constant";
-import { useAuth } from '../../service/AuthService';
+import AuthService from "../../service/AuthService.js";
 import pay from "../../service/PaymentService.js";
 import { addOrder, addOrderDetail } from "../../service/OrderDetail.js";
 import { checkLoyalCustomer } from "../../service/AccountService.js";
@@ -22,7 +22,7 @@ const Payment = () => {
   const finalTotal = loyalCustomer ? (totalAmt + shippingFee) * 0.85 : totalAmt + shippingFee;
   const discountAmount = loyalCustomer ? (totalAmt + shippingFee) * 0.15 : 0;
   const [address, setAddress] = useState('');
-  const { getUser } = useAuth();
+
 
   useEffect(() => {
     let price = 0;
@@ -38,7 +38,7 @@ const Payment = () => {
 
 
   useEffect(() => {
-    getUser().then((res) => {
+    AuthService.getUser().then((res) => {
       setUser(res.data);
       console.log(res.data);
     }).catch((e) => console.error(e));

@@ -16,11 +16,13 @@ import org.springframework.stereotype.Service;
 import vn.edu.hunre.qlbs.config.MomoConfig;
 import vn.edu.hunre.qlbs.config.VNPAYConfig;
 import vn.edu.hunre.qlbs.config.ZaloPayConfig;
+import vn.edu.hunre.qlbs.entity.OrderEntity;
 import vn.edu.hunre.qlbs.entity.PaymentEntity;
 import vn.edu.hunre.qlbs.mapper.PaymentMethodMapper;
 import vn.edu.hunre.qlbs.model.dto.PaymentMethodDto;
 import vn.edu.hunre.qlbs.model.response.BaseResponse;
 import vn.edu.hunre.qlbs.model.response.VNPayResponse;
+import vn.edu.hunre.qlbs.repository.OrderRepository;
 import vn.edu.hunre.qlbs.repository.PaymentRepository;
 import vn.edu.hunre.qlbs.service.IPaymentService;
 import vn.edu.hunre.qlbs.utils.Constant;
@@ -48,6 +50,8 @@ public class IPaymentServiceImpl implements IPaymentService {
     private PaymentRepository paymentRepository;
     @Autowired
     private PaymentMethodMapper paymentMethodMapper;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public BaseResponse<PaymentMethodDto> addPaymentMethod(PaymentMethodDto paymentMethod) {
@@ -60,6 +64,17 @@ public class IPaymentServiceImpl implements IPaymentService {
         response.setData(paymentMethodMapper.toDto(payment));
         return response;
     }
+
+    @Override
+    public BaseResponse<PaymentMethodDto> showPaymentMethod(Long orderId) {
+        BaseResponse<PaymentMethodDto> response = new BaseResponse<>();
+        PaymentEntity payment = paymentRepository.getPaymentEntity(orderId);
+        response.setMessage(Constant.HTTP_MESSAGE.SUCCESS);
+        response.setCode(HttpStatus.OK.value());
+        response.setData(paymentMethodMapper.toDto(payment));
+        return response;
+    }
+
 
 
     public VNPayResponse createVnPayment(HttpServletRequest request) {

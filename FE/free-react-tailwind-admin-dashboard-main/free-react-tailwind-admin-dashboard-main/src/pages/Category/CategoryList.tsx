@@ -4,6 +4,8 @@ import { addCategory, deleteCategory, findByIdCategory, getAllCategory, updateCa
 import { Category } from '../../types/Category';
 import { Pencil, Trash2 } from 'lucide-react';
 import { confirmDelete } from '../../utils/ConfirmationDialog';
+import { ToastContainer, toast } from 'react-toastify'; // Import thư viện
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CategoryList = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -70,12 +72,12 @@ export const CategoryList = () => {
       updateCategory(Number(data.id), data).then(() => {
         setModalOpen(false);
         getAllCategories();
-        alert("Cập nhật danh mục thành công!");
+        toast.success("Cập nhật danh mục thành công!");
         setData({id:0, code:'', name:''});
       }).catch((e) => console.error(e));
     }else{
       addCategory(data).then(() => {
-        alert("Thêm danh mục thành công!");
+        toast.success("Thêm danh mục thành công!");
         setModalOpen(false);
         setData({id:0, code:'', name:''});
         getAllCategories();
@@ -87,6 +89,7 @@ export const CategoryList = () => {
   return (
     <>
       <Breadcrumb pageName='Danh sách danh mục' />
+      <ToastContainer />
       <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700" style={{ width: 150, marginBottom: 10 }} onClick={() => {setIsEditting(false); setModalOpen(true); }}>Thêm danh mục</button>
       <div className="flex flex-col gap-10">
         <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">

@@ -24,7 +24,6 @@ import FavoriteList from "./pages/FavoriteList/FavoriteList";
 import { Success } from "./constants/Success";
 import { Order } from "./pages/Order/Order";
 import { Profile } from "./pages/Infor/Profile";
-import ProtectedRoute from "./route/ProtectedRoute";
 
 
 const Layout = () => {
@@ -48,14 +47,14 @@ const router = createBrowserRouter(
         <Route index element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/favorite" element={<ProtectedRoute> <FavoriteList/> </ProtectedRoute>}></Route>
+        <Route path="/favorite" element={<FavoriteList/>}></Route>
         <Route path="/order" element={<Order/>}></Route>
         <Route path="/success" element={<Success/>}></Route>
-        <Route path="/profile" element={<ProtectedRoute>  <Profile/>  </ProtectedRoute>}></Route>
+        <Route path="/profile" element={<Profile/>}></Route>
         {/* ==================== Header Navlink End here ===================== */}
         <Route path="/offer" element={<Offer />}></Route>
         <Route path="/product/:id" element={<ProductDetails />}></Route>
-        <Route path="/cart" element={<ProtectedRoute> <Cart />  </ProtectedRoute>}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
         <Route path="/paymentgateway" element={<Payment />}></Route>
       </Route>
       <Route path="/signup" element={<SignUp />}></Route>

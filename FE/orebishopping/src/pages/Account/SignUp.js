@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useRoutes } from "react-router-dom";
 import { logoLight } from "../../assets/images";
-import { useAuth } from '../../service/AuthService';
+import { useDispatch } from "react-redux";
+import api from '../../service/AuthService'
 
 const SignUp = () => {
   const [formData, setFormData] = useState({ fullname: '', email: '', phone: '', password: '', "roleIds": [3] });
   const [message, setMessage] = useState('');
   const [dataOtp, setDataOtp] = useState({ verificationCode: '', registerUserDto: '' });
   const [isOtpModalVisible, setIsOtpModalVisible] = useState(false);
-  const navigate = useNavigate();
-  const { signUp, verifyOtp, resend } = useAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // Sử dụng useNavigate thay vì useRoutes
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -21,6 +22,7 @@ const SignUp = () => {
     });
   };
 
+
   const verificationCode = (e) => {
     const { id, value } = e.target;
     const updatedDataOtp = { ...dataOtp, [id]: value };
@@ -29,8 +31,9 @@ const SignUp = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    // console.log(formData);
     document.getElementById("btnSignup").disabled = true;
-    signUp(formData).then((response) => {
+    api.signUp(formData).then((response) => {
       if (response.code === 200) {
         setIsOtpModalVisible(true);
       } else {
@@ -41,16 +44,17 @@ const SignUp = () => {
 
   const handleOtpSubmit = (e) => {
     e.preventDefault();
-    verifyOtp(dataOtp).then((response) => {
+    api.verifyOtp(dataOtp).then((response) => {
       if (response === "Account verified successfully") {
-        navigate("/signin");
+        navigate("/signin"); // Sử dụng navigate để chuyển hướng
       }
     });
   };
 
   const resendCode = () => {
-    resend(formData.email);
+    api.resend(formData.email);
   };
+
 
   return (
     <div className="w-full h-screen flex items-center justify-start">

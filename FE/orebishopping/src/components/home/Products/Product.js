@@ -17,7 +17,7 @@ const Product = ({ id, name, imageUrl, price, author, discount, quantity }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  const {addCartItem} = useCart();
+  const { addCartItem } = useCart();
 
 
   // Xử lý xem chi tiết sản phẩm
@@ -38,34 +38,35 @@ const Product = ({ id, name, imageUrl, price, author, discount, quantity }) => {
   }
 
   const handleAddToCart = () => {
-    const obj = {bookId:id,quantity:1}
-    try{
-      if(token){
+    const obj = { bookId: id, quantity: 1 }
+    try {
+      if (token) {
         addCartItem(obj)
         toast.success("Thêm vào giỏ hàng thành công")
-      }else{
+      } else {
         toast.error("Vui lòng đăng nhập!")
       }
-    }catch(e){
+    } catch (e) {
       toast.error("Sản phẩm đã hết hàng");
     }
-  
+
   }
 
   return (
     <div className="w-full relative group">
       <ToastContainer />
       <div className="max-w-80 max-h-80 relative overflow-y-hidden">
-        <div>
-          <Image className="w-full h-full" imgSrc={imageUrl} />
+        <div className="w-[320px] h-[420px] relative overflow-hidden">
+          <Image className="w-[320px] h-[330px] object-cover" imgSrc={imageUrl} />
         </div>
+
         <div className="absolute top-6 left-8">
           {discount !== null && discount !== undefined && <Badge discount={discount} />}
         </div>
         <div className="w-full h-32 absolute bg-white -bottom-[130px] group-hover:bottom-0 duration-700">
           <ul className="w-full h-full flex flex-col items-end justify-center gap-2 font-titleFont px-2 border-l border-r">
-      
-          {quantity > 0 && (
+
+            {quantity > 0 && (
               <li
                 onClick={() => handleAddToCart()}
                 className="hover:text-primeColor text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
