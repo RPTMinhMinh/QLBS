@@ -14,6 +14,7 @@ const Header = () => {
   const [category, setCategory] = useState(false);
   const [brand, setBrand] = useState(false);
   const location = useLocation();
+
   useEffect(() => {
     let ResponsiveMenu = () => {
       if (window.innerWidth < 667) {
@@ -24,6 +25,24 @@ const Header = () => {
     };
     ResponsiveMenu();
     window.addEventListener("resize", ResponsiveMenu);
+
+    // Thêm script cho chatbox
+    const script1 = document.createElement("script");
+    script1.textContent = `window.chtlConfig = { chatbotId: "7859981533" };`;
+    document.body.appendChild(script1);
+
+    const script2 = document.createElement("script");
+    script2.src = "https://chatling.ai/js/embed.js";
+    script2.async = true;
+    script2.id = "chatling-embed-script";
+    script2.setAttribute("data-id", "7859981533");
+    document.body.appendChild(script2);
+
+    // Cleanup function để xóa script khi component unmount
+    return () => {
+      document.body.removeChild(script1);
+      document.body.removeChild(script2);
+    };
   }, []);
 
   return (
@@ -48,7 +67,6 @@ const Header = () => {
                     <NavLink
                       key={_id}
                       className="flex font-normal hover:font-bold w-20 h-6 justify-center items-center px-12 text-base text-[#767676] hover:underline underline-offset-[4px] decoration-[1px] hover:text-[#262626] md:border-r-[2px] border-r-gray-300 hoverEffect last:border-r-0 whitespace-nowrap"
-
                       to={link}
                       state={{ data: location.pathname.split("/")[1] }}
                     >
@@ -100,20 +118,6 @@ const Header = () => {
                         Shop by Category{" "}
                         <span className="text-lg">{category ? "-" : "+"}</span>
                       </h1>
-                      {/* {category && (
-                        <motion.ul
-                          initial={{ y: 15, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ duration: 0.4 }}
-                          className="text-sm flex flex-col gap-1"
-                        >
-                          <li className="headerSedenavLi">New Arrivals</li>
-                          <li className="headerSedenavLi">Gudgets</li>
-                          <li className="headerSedenavLi">Accessories</li>
-                          <li className="headerSedenavLi">Electronics</li>
-                          <li className="headerSedenavLi">Others</li>
-                        </motion.ul>
-                      )} */}
                     </div>
                     <div className="mt-4">
                       <h1
@@ -123,20 +127,6 @@ const Header = () => {
                         Shop by Brand
                         <span className="text-lg">{brand ? "-" : "+"}</span>
                       </h1>
-                      {/* {brand && (
-                        <motion.ul
-                          initial={{ y: 15, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          transition={{ duration: 0.4 }}
-                          className="text-sm flex flex-col gap-1"
-                        >
-                          <li className="headerSedenavLi">New Arrivals</li>
-                          <li className="headerSedenavLi">Gudgets</li>
-                          <li className="headerSedenavLi">Accessories</li>
-                          <li className="headerSedenavLi">Electronics</li>
-                          <li className="headerSedenavLi">Others</li>
-                        </motion.ul>
-                      )} */}
                     </div>
                   </div>
                   <span

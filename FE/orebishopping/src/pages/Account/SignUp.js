@@ -11,7 +11,7 @@ const SignUp = () => {
   const [dataOtp, setDataOtp] = useState({ verificationCode: '', registerUserDto: '' });
   const [isOtpModalVisible, setIsOtpModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Sử dụng useNavigate thay vì useRoutes
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
