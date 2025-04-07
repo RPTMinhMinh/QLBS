@@ -36,7 +36,7 @@ const Footer = () => {
           <FooterListTitle title="Thông tin thêm về Orebi Shop" />
           <div className="flex flex-col gap-6">
             <p className="text-base w-full xl:w-[80%]">
-            Tại Orebi, chúng tôi cam kết mang đến những sản phẩm chất lượng cao, dịch vụ tuyệt vời và trải nghiệm mua sắm trực tuyến không thể quên. Chúng tôi tin rằng mỗi sản phẩm đều mang theo một câu chuyện và giá trị riêng.
+              Tại Orebi, chúng tôi cam kết mang đến những sản phẩm chất lượng cao, dịch vụ tuyệt vời và trải nghiệm mua sắm trực tuyến không thể quên. Chúng tôi tin rằng mỗi sản phẩm đều mang theo một câu chuyện và giá trị riêng.
 
             </p>
             <ul className="flex items-center gap-2">
@@ -166,9 +166,8 @@ const Footer = () => {
             )}
 
             <Image
-              className={`w-[80%] lg:w-[60%] mx-auto ${
-                subscription ? "mt-2" : "mt-6"
-              }`}
+              className={`w-[80%] lg:w-[60%] mx-auto ${subscription ? "mt-2" : "mt-6"
+                }`}
               imgSrc={paymentCard}
             />
           </div>
