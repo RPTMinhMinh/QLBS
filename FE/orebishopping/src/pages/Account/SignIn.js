@@ -128,12 +128,15 @@ const SignIn = () => {
                   <input
                       onChange={handleEmail}
                       value={email}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                      className={`w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] ${
+                          error.email ? "border-red-500" : "border-gray-400"
+                      } outline-none`}
                       type="email"
                       placeholder="Nhập email"
                   />
-                  {error.email &&
-                      <p style={{ textAlign: 'left', color: 'red' }}>{error.email}</p>}
+                  {error.email && (
+                      <p className="error-message text-red-500 text-sm mt-1">{error.email}</p>
+                  )}
                 </div>
 
                 {/* Password */}
@@ -144,12 +147,15 @@ const SignIn = () => {
                   <input
                       onChange={handlePassword}
                       value={password}
-                      className="w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] border-gray-400 outline-none"
+                      className={`w-full h-8 placeholder:text-sm placeholder:tracking-wide px-4 text-base font-medium placeholder:font-normal rounded-md border-[1px] ${
+                          error.password ? "border-red-500" : "border-gray-400"
+                      } outline-none`}
                       type="password"
                       placeholder="Nhập mật khẩu"
                   />
-                  {error.password &&
-                      <p style={{ textAlign: 'left', color: 'red' }}>{error.password}</p>}
+                  {error.password && (
+                      <p className="error-message text-red-500 text-sm mt-1">{error.password}</p>
+                  )}
                 </div>
 
                 <button

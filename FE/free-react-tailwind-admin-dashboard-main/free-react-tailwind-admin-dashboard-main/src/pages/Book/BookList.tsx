@@ -104,7 +104,7 @@ export const BookList = () => {
   }
 
   const handleRemove = (id: number) => {
-    confirmDelete('Bạn chắc chắn mốn xóa sách này ?', 'Hành động này không thể hoàn tác!', () => {
+    confirmDelete('Bạn chắc chắn muốn xóa sách này ?', 'Hành động này không thể hoàn tác!', () => {
       deleteBook(id).then(() => {
         getAllBooks()
       }).catch((error: any) => console.error(error));
