@@ -2,19 +2,20 @@ import React, { useEffect, useState } from 'react';
 import CardDataStats from '../../components/CardDataStats';
 import ChartOne from '../../components/Charts/ChartOne';
 import ChartThree from '../../components/Charts/ChartThree';
-import ChartTwo from '../../components/Charts/ChartTwo';
-import ChatCard from '../../components/Chat/ChatCard';
-import MapOne from '../../components/Maps/MapOne';
 import { countAccount } from '../../service/AccountService';
 import { countBook } from '../../service/BookService';
 import { countOrder } from '../../service/OrderService';
 import { countReview } from '../../service/ReviewService';
+import { exportExcel, exportExcelByMonth, exportExcelByWeek, exportExcelByYear } from '../../service/RevenueService.ts';
+import { toast } from 'react-toastify';
+import { saveAs } from 'file-saver';
 
 const ECommerce: React.FC = () => {
   const [countAccountNumber, setCountAccountNumber] = useState<number>(0);
   const [countBookNumber, setCountBookNumber] = useState<number>(0);
   const [countOrderNumber, setCountOrderNumber] = useState<number>(0);
   const [countReviewNumber, setCountReviewNumber] = useState<number>(0);
+  const [selectedOption, setSelectedOption] = useState('');
 
   useEffect(() => {
     countAccount().then((res) => {
@@ -33,10 +34,48 @@ const ECommerce: React.FC = () => {
       setCountReviewNumber(res.data);
     }).catch((e) => console.error(e));
   }, [])
+
+  const handleExport = (value: string) => {
+    const exportFunction = (apiCall: Promise<any>, fileName: string) => {
+      apiCall.then((res) => {
+        if (res.data instanceof Blob) {
+          const blob = new Blob([res.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, fileName);
+          toast.success('Excel has been exported');
+        } else {
+          toast.error('Failed to export Excel: No data received');
+        }
+      }).catch((error) => {
+        toast.error('Failed to export Excel: ' + error.message);
+      });
+    };
+
+    switch (value) {
+      case 'week':
+        exportFunction(exportExcelByWeek(), 'revenue_week.xlsx');
+        break;
+      case 'month':
+        exportFunction(exportExcelByMonth(), 'revenue_month.xlsx');
+        break;
+      case 'year':
+        exportFunction(exportExcelByYear(), 'revenue_year.xlsx');
+        break;
+      case 'all':
+        exportFunction(exportExcel(), 'revenue_all.xlsx');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Người dùng" total={countAccountNumber.toString()} rate="">
+        <CardDataStats
+          title="Người dùng"
+          total={countAccountNumber.toString()}
+          rate=""
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -59,7 +98,11 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Đơn hàng" total={countOrderNumber.toString()} rate="">
+        <CardDataStats
+          title="Đơn hàng"
+          total={countOrderNumber.toString()}
+          rate=""
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="20"
@@ -82,7 +125,11 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Sản phẩm" total={countBookNumber.toString()} rate="">
+        <CardDataStats
+          title="Sản phẩm"
+          total={countBookNumber.toString()}
+          rate=""
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -101,7 +148,11 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Đánh giá" total={countReviewNumber.toString()} rate="">
+        <CardDataStats
+          title="Đánh giá"
+          total={countReviewNumber.toString()}
+          rate=""
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -122,18 +173,36 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
       </div>
 
-      <div className="mt-4 grid grid-cols-8 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartOne />
-        {/* <ChartTwo /> */}
-        <ChartThree />
-        {/* <MapOne /> */}
-        {/* <div className="col-span-12 xl:col-span-8">
+      <div className="flex justify-end mt-4">
+        <div className="relative inline-block text-right">
+          <select
+            value={selectedOption}
+            onChange={(e) => {
+              setSelectedOption(e.target.value);
+              handleExport(e.target.value);
+            }}
+            className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Xuất Excel Thống kê doanh thu</option>
+            <option value="week">Theo tuần</option>
+            <option value="month">Theo tháng</option>
+            <option value="year">Theo năm</option>
+            <option value="all">Tất cả</option>
+          </select>
+        </div>
+      </div>
+
+        <div className="mt-4 grid grid-cols-8 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+          <ChartOne />
+          {/* <ChartTwo /> */}
+          <ChartThree />
+          {/* <MapOne /> */}
+          {/* <div className="col-span-12 xl:col-span-8">
 
         </div> */}
-        {/* <ChatCard /> */}
-      </div>
-    </>
-  );
-};
+          {/* <ChatCard /> */}
+        </div>
+      </>
+      );
+      };
 
-export default ECommerce;
+      export default ECommerce;

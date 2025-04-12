@@ -327,7 +327,7 @@ export const AddBook = () => {
               </div>
               <div className="mb-6">
                 <label className="mb-3 block text-black dark:text-white">
-                  Ảnh khóa học
+                  Ảnh sách
                 </label>
                 <input
                   type="file"

@@ -95,7 +95,7 @@ export const AccountList = () => {
   }
 
   const handleRemove = (id: number) => {
-    confirmDelete('Bạn chắc chắn mốn xóa tài khoản này ?', 'Hành động này không thể hoàn tác!', () => {
+    confirmDelete('Bạn chắc chắn muốn xóa tài khoản này ?', 'Hành động này không thể hoàn tác!', () => {
       deleteAccount(id).then(() => {
         getAllAccounts()
       }).catch((error: any) => console.error(error));

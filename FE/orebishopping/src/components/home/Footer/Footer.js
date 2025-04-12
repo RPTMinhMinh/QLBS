@@ -82,22 +82,22 @@ const Footer = () => {
 
         {/* Phần danh mục sản phẩm */}
         <div>
-          <FooterListTitle title="Cửa hàng" />
+          <FooterListTitle title="Danh mục" />
           <ul className="flex flex-col gap-2">
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Phụ kiện
+              Trinh thám - kinh dị
             </li>
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Quần áo
+              Văn học hiện đại
             </li>
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Điện tử
+              Văn học kinh điển
             </li>
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Thiết bị gia đình
+              Văn học thiếu nhi
             </li>
             <li className="font-titleFont text-base text-lightText hover:text-black hover:underline decoration-[1px] decoration-gray-500 underline-offset-2 cursor-pointer duration-300">
-              Sản phẩm mới
+              Khoa học viễn tưởng
             </li>
           </ul>
         </div>

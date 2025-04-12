@@ -52,7 +52,7 @@ export const CategoryList = () => {
   };
 
   const handleRemove = (id:number) => {
-    confirmDelete('Bạn chắc chắn mốn xóa danh mục này ?','Hành động này không thể hoàn tác!', () => {
+    confirmDelete('Bạn chắc chắn muốn xóa danh mục này ?','Hành động này không thể hoàn tác!', () => {
       deleteCategory(id).then(()=>{
         getAllCategories()
       }).catch((error:any) => console.error(error));

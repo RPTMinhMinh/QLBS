@@ -133,7 +133,7 @@ const Payment = () => {
 
   return (
     <div className="max-w-container mx-auto px-4">
-      <Breadcrumbs title="Payment gateway" />
+      <Breadcrumbs title="Thanh toán" />
       <div className="pb-10 flex flex-col md:flex-row">
         {/* Account Information Section */}
         <div className="md:w-1/2 p-4">

@@ -16,5 +16,4 @@ public interface IOrderService {
     ResponsePage<List<OrderDto>> getOrdersByEmail(Pageable pageable);
     ResponsePage<List<OrderDto>> findByCondition(String code, String accountName,String status, Pageable pageable);
     BaseResponse<Long> countOrder();
-
 }

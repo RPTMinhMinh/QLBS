@@ -1,5 +1,6 @@
 package vn.edu.hunre.qlbs.service;
 
+import java.io.File;
 import vn.edu.hunre.qlbs.model.dto.CategoryRevenueDto;
 import vn.edu.hunre.qlbs.model.dto.RevenueByMonthDto;
 import vn.edu.hunre.qlbs.model.dto.RevenueByWeekDto;
@@ -13,4 +14,8 @@ public interface IRevenueService {
     BaseResponse<List<RevenueByMonthDto>> getRevenueByMonth();
     BaseResponse<List<RevenueByWeekDto>> getRevenueByWeek();
     BaseResponse<List<RevenueByYearDto>> getRevenueByYear();
+    File exportToExcel();
+    File exportToExcelByMonth();
+    File exportToExcelByWeek();
+    File exportToExcelByYear();
 }

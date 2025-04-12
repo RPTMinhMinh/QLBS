@@ -6,16 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import vn.edu.hunre.qlbs.entity.BookEntity;
 import vn.edu.hunre.qlbs.entity.OrderEntity;
 import vn.edu.hunre.qlbs.model.dto.CategoryRevenueDto;
 import vn.edu.hunre.qlbs.model.dto.RevenueByMonthDto;
 import vn.edu.hunre.qlbs.model.dto.RevenueByWeekDto;
 import vn.edu.hunre.qlbs.model.dto.RevenueByYearDto;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
@@ -91,13 +88,13 @@ ORDER BY year DESC, month DESC;
     List<RevenueByMonthDto> revenueByMonth();
 
     @Query("SELECT new vn.edu.hunre.qlbs.model.dto.RevenueByWeekDto( " +
-            "YEAR(o.createdDate), WEEK(o.createdDate), SUM(od.quantity * (od.price - b.importPrice))) " +
-            "FROM OrderEntity o " +
-            "JOIN o.orderDetailEntities od " +
-            "JOIN od.bookEntity b " +
-            "WHERE o.status = 'Đã giao hàng' " +
-            "GROUP BY YEAR(o.createdDate), WEEK(o.createdDate) " +
-            "ORDER BY YEAR(o.createdDate) DESC, WEEK(o.createdDate) DESC")
+        "YEAR(o.createdDate), WEEK(o.createdDate), SUM(od.quantity * (od.price - b.importPrice))) " +
+        "FROM OrderEntity o " +
+        "JOIN o.orderDetailEntities od " +
+        "JOIN od.bookEntity b " +
+        "WHERE o.status = 'Đã giao hàng' " +
+        "GROUP BY YEAR(o.createdDate), WEEK(o.createdDate) " +
+        "ORDER BY YEAR(o.createdDate) DESC, WEEK(o.createdDate) DESC")
     List<RevenueByWeekDto> revenueByWeek();
 
     @Query("SELECT new vn.edu.hunre.qlbs.model.dto.RevenueByYearDto( " +
@@ -110,5 +107,7 @@ ORDER BY year DESC, month DESC;
             "ORDER BY YEAR(o.createdDate) DESC")
     List<RevenueByYearDto> revenueByYear();
 
+//    @Query("SELECT o FROM OrderEntity o WHERE YEAR(o.createdDate) = :year AND MONTH(o.createdDate) = :month")
+//    List<OrderEntity> findByMonth(@Param("year") int year, @Param("month") int month);
 
 }

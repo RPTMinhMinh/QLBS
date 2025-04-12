@@ -79,9 +79,9 @@ export const ReviewList = () => {
                     <td className="py-4 px-6">{review.accountName}</td>
                     <td className="py-4 px-4 flex gap-4">
                       <button className="text-yellow-600 hover:text-yellow-800 transition">
-                        <Pencil 
-                        // onClick={() => handleEdit(Number(category.id))} 
-                        size={20} />
+                        {/*<Pencil */}
+                        {/*// onClick={() => handleEdit(Number(category.id))} */}
+                        {/*size={20} />*/}
                       </button>
                       <button className="text-red-600 hover:text-red-800 transition">
                         <Trash2 

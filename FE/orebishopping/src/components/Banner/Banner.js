@@ -104,12 +104,12 @@ const Banner = () => {
       <Slider {...settings}>
         <Link to="/shop">
           <div>
-            <Image imgSrc={bannerImgOne} />
+            <Image imgSrc={bannerImgTwo} />
           </div>
         </Link>
         <Link to="/shop">
           <div>
-            <Image imgSrc={bannerImgTwo} />
+            <Image imgSrc={bannerImgOne} />
           </div>
         </Link>
         <Link to="/shop">

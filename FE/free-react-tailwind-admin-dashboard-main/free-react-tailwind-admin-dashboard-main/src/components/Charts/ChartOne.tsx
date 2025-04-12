@@ -14,17 +14,17 @@ const ChartOne: React.FC = () => {
       let data;
       if (filter === "week") {
         data = await revenueByWeek();
-        data.data.sort((a: any, b: any) => a.week - b.week); // Sắp xếp tuần tăng dần
+        data.data.sort((a: any, b: any) => a.week - b.week);
         setCategories(data.data.map((d: any) => `Tuần ${d.week}`));
         setSeries([{ name: "Total Revenue", data: data.data.map((d: any) => d.revenue) }]);
       } else if (filter === "month") {
         data = await revenueByMonth();
-        data.data.sort((a: any, b: any) => a.month - b.month); // Sắp xếp tháng tăng dần
+        data.data.sort((a: any, b: any) => a.month - b.month);
         setCategories(data.data.map((d: any) => `Tháng ${d.month}`));
         setSeries([{ name: "Total Revenue", data: data.data.map((d: any) => d.totalRevenue) }]);
       } else {
         data = await revenueByYear();
-        data.data.sort((a: any, b: any) => a.year - b.year); // Sắp xếp năm tăng dần
+        data.data.sort((a: any, b: any) => a.year - b.year);
         setCategories(data.data.map((d: any) => `Năm ${d.year}`));
         setSeries([{ name: "Total Revenue", data: data.data.map((d: any) => d.revenue) }]);
       }

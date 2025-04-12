@@ -60,18 +60,18 @@ const NewArrivals = () => {
       <Heading heading="Sản phẩm mới" />
       <Slider {...settings}>
       {data.map((book) =>
-          <div className="px-2" key={book.id}>
+          <div className="px-2 !w-[96%] !inline-block" key={book.id}>
             {/* id, name, imageUrl, price, author, discount */}
             <Product
-              id= {book.id}
-              imageUrl={book.imageUrl}
-              name={book.name}
-              price={book.price}
-              author={book.author}
-              discount={book.discount}
+                id={book.id}
+                imageUrl={book.imageUrl}
+                name={book.name}
+                price={book.price}
+                author={book.author}
+                discount={book.discount}
             />
           </div>
-        )}
+      )}
       </Slider>
     </div>
   );
