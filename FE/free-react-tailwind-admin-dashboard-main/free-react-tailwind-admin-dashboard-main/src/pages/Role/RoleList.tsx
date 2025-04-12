@@ -86,7 +86,7 @@ const handleSave = () =>{
   return (
     <>
       <Breadcrumb pageName='Danh sách quyền' />
-      <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700" style={{ width: 150, marginBottom: 10 }} onClick={() => {setIsEditting(false); setModalOpen(true); }} >Thêm Quyền</button>
+      {/*<button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700" style={{ width: 150, marginBottom: 10 }} onClick={() => {setIsEditting(false); setModalOpen(true); }} >Thêm Quyền</button>*/}
       <div className="flex flex-col gap-10">
         <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
           <div className="max-w-full overflow-x-auto">
@@ -106,11 +106,11 @@ const handleSave = () =>{
                     <td className="py-4 px-6">{role.code}</td>
                     <td className="py-4 px-6">{role.name}</td>
                     <td className="py-4 px-4 flex gap-4">
-                      <button className="text-yellow-600 hover:text-yellow-800 transition">
-                        <Pencil 
-                        onClick={() => handleEdit(Number(role.id))} 
-                        size={20} />
-                      </button>
+                      {/*<button className="text-yellow-600 hover:text-yellow-800 transition">*/}
+                      {/*  <Pencil */}
+                      {/*  onClick={() => handleEdit(Number(role.id))} */}
+                      {/*  size={20} />*/}
+                      {/*</button>*/}
                       <button className="text-red-600 hover:text-red-800 transition">
                         <Trash2 
                         onClick={() => handleRemove(Number(role.id))} 

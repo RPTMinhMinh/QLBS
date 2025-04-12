@@ -61,19 +61,19 @@ const BestSellers = () => {
       <Heading heading="Sản phẩm bán chạy" />
       <Slider {...settings}>
         {data.map((book) =>
-          <div className="px-2" key={book.id}>
-            {/* id, name, imageUrl, price, author, discount */}
-            <Product
-              id= {book.id}
-              imageUrl={book.imageUrl}
-              name={book.name}
-              price={book.price}
-              author={book.author}
-              discount={book.discount}
-            />
-          </div>
+            <div className="px-2 !w-[96%] !inline-block" key={book.id}>
+              {/* id, name, imageUrl, price, author, discount */}
+              <Product
+                  id={book.id}
+                  imageUrl={book.imageUrl}
+                  name={book.name}
+                  price={book.price}
+                  author={book.author}
+                  discount={book.discount}
+              />
+            </div>
         )}
-        
+
       </Slider>
     </div>
   );

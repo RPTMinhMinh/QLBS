@@ -1,7 +1,5 @@
 package vn.edu.hunre.qlbs.model.dto;
 
-import java.math.BigDecimal;
-
 public class RevenueByMonthDto {
     private Integer year;
     private Integer month;

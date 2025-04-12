@@ -21,3 +21,23 @@ export const revenueByYear = async() => {
     const response = axiosInstance.get(`${api}/revenue-by-year`);
     return (await response).data;
 }
+
+export const exportExcel = async () => {
+    const response = await axiosInstance.get(`${api}/exportExcel`, { responseType: 'blob' });
+    return response;
+};
+
+export const exportExcelByMonth = async () => {
+    const response = await axiosInstance.get(`${api}/exportExcelByMonth`, { responseType: 'blob' });
+    return response;
+};
+
+export const exportExcelByYear = async () => {
+    const response = await axiosInstance.get(`${api}/exportExcelByYear`, { responseType: 'blob' });
+    return response;
+};
+
+export const exportExcelByWeek = async () => {
+    const response = await axiosInstance.get(`${api}/exportExcelByWeek`, { responseType: 'blob' });
+    return response;
+};

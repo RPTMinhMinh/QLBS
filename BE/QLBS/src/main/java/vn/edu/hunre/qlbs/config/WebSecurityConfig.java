@@ -61,7 +61,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/api/order/create").hasAnyRole( "CUSTOMER")
                                 .requestMatchers("/api/order-detail").hasAnyRole( "CUSTOMER")
                                 .requestMatchers("api/order/count-order").hasAnyRole("ADMIN")
-                                .requestMatchers("api/revenue/list").hasAnyRole("ADMIN")
+                                .requestMatchers("api/revenue/**").hasAnyRole("ADMIN")
                                 .requestMatchers("api/payment/show-payment-method/**").hasAnyRole("CUSTOMER")
                                 .anyRequest().authenticated()
                 );

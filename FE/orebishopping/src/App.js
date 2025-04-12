@@ -53,8 +53,8 @@ const router = createBrowserRouter(
                     <Route path="/order" element={<Order/>}></Route>
                     <Route path="/success" element={<Success/>}></Route>
                     <Route path="/cart" element={<Cart/>}></Route>
+                    <Route path="/profile" element={<Profile/>}></Route>
                 </Route>
-                <Route path="/profile" element={<Profile/>}></Route>
                 {/* ==================== Header Navlink End here ===================== */}
                 <Route path="/offer" element={<Offer/>}></Route>
                 <Route path="/product/:id" element={<ProductDetails/>}></Route>

@@ -55,7 +55,7 @@ export const PublisherList = () => {
 
 
   const handleRemove = (id:number) => {
-    confirmDelete('Bạn chắc chắn mốn xóa nhà xuất bản này ?','Hành động này không thể hoàn tác!', () => {
+    confirmDelete('Bạn chắc chắn muốn xóa nhà xuất bản này ?','Hành động này không thể hoàn tác!', () => {
       deletePublisher(id).then(()=>{
         getAllPublishers()
       }).catch((error:any) => console.error(error));
@@ -159,9 +159,9 @@ export const PublisherList = () => {
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl shadow-xl w-[500px] relative">
-            <h3 className="text-xl font-semibold mb-4">{isEditing ? 'Chỉnh sửa danh mục' : 'Thêm danh mục'}</h3>
+            <h3 className="text-xl font-semibold mb-4">{isEditing ? 'Chỉnh sửa nhà xuất bản' : 'Thêm nhà xuất bản'}</h3>
             <div className="mb-4" hidden={!isEditing}>
-              <label className="block text-gray-700 font-medium">Mã danh mục</label>
+              <label className="block text-gray-700 font-medium">Mã nhà xuất bản</label>
               <input type="text" name="code" value={data.code} onChange={(e) => {
                 if (!isEditing) {
                   setData({ ...data, code: e.target.value });
@@ -169,7 +169,7 @@ export const PublisherList = () => {
               }} className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" disabled={isEditing} />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-medium">Tên danh mục</label>
+              <label className="block text-gray-700 font-medium">Tên nhà xuất bản</label>
               <input type="text" name="name" value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })}                   className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary" />
             </div>
             <div className="mb-4">

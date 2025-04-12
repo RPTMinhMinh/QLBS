@@ -53,14 +53,14 @@ const Product = ({ id, name, imageUrl, price, author, discount, quantity }) => {
 
   return (
       <div className="w-full relative group">
-        <ToastContainer />
+        <ToastContainer/>
         <div className="max-w-80 max-h-80 relative overflow-y-hidden">
           <div className="w-[320px] h-[420px] relative overflow-hidden">
-            <Image className="w-[320px] h-[330px] object-cover" imgSrc={imageUrl} />
+            <Image className="w-[320px] h-[340px] object-cover" imgSrc={imageUrl}/>
           </div>
 
           <div className="absolute top-6 left-8">
-            {discount !== null && discount !== undefined && <Badge discount={discount} />}
+            {discount !== null && discount !== undefined && <Badge discount={discount}/>}
           </div>
           <div className="w-full h-32 absolute bg-white -bottom-[130px] group-hover:bottom-0 duration-700">
             <ul className="w-full h-full flex flex-col items-end justify-center gap-2 font-titleFont px-2 border-l border-r">
@@ -71,7 +71,7 @@ const Product = ({ id, name, imageUrl, price, author, discount, quantity }) => {
                       className="hover:text-primeColor text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
                   >
                     Thêm vào giỏ hàng
-                    <FaShoppingCart />
+                    <FaShoppingCart/>
                   </li>
               )}
               <li
@@ -79,31 +79,35 @@ const Product = ({ id, name, imageUrl, price, author, discount, quantity }) => {
                   className="hover:text-primeColor text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
               >
                 Xem chi tiết
-                <MdOutlineLabelImportant />
+                <MdOutlineLabelImportant/>
               </li>
               <li
                   onClick={() => handleAddToWishlist(id)}
                   className="hover:text-primeColor text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full">
                 Yêu thích
-                <BsSuitHeartFill />
+                <BsSuitHeartFill/>
               </li>
             </ul>
           </div>
         </div>
         <div className="max-w-80 py-6 flex flex-col gap-1 border-[1px] border-t-0 px-4">
-          <div className="flex items-center justify-between font-titleFont">
-            <h2 className="text-lg font-bold">{name}</h2>
+          <div className="flex items-center justify-between gap-3 font-titleFont">
+            <h2
+                className="text-lg font-bold truncate"
+                title={name}
+            >
+              {name}
+            </h2>
             {discount ? (
-                <div className="flex flex-col items-end">
-                  <p className="text-[14px] text-gray-500 line-through">{formatPrice(price)}</p>
-                  <p className="text-[14px] text-red-500">{formatPrice(discountedPrice)}</p>
-                </div>
+                <p className="text-[14px] text-red-500 whitespace-nowrap">{formatPrice(discountedPrice)}</p>
             ) : (
-                <p className="text-[14px]">{formatPrice(price)}</p>
+                <p className="text-[14px] whitespace-nowrap">{formatPrice(price)}</p>
             )}
           </div>
-          <p className="text-[14px]">{author}</p>
+          <p className="text-[14px] text-gray-600">{author}</p>
         </div>
+
+
       </div>
   );
 };
