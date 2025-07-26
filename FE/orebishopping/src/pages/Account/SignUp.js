@@ -325,7 +325,7 @@ const SignUp = () => {
                       transition: 'background 0.3s',
                     }}>Xác nhận
                     </button>
-                    <button className="rts-btn btn-secondary" style={{
+                    {/* <button className="rts-btn btn-secondary" style={{
                       backgroundColor: '#ffc107',
                       color: '#ffffff',
                       border: 'none',
@@ -335,7 +335,7 @@ const SignUp = () => {
                       transition: 'background 0.3s',
                     }}
                             onClick={resendCode}>Gửi lại mã
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>

@@ -69,6 +69,7 @@ const NewArrivals = () => {
                 price={book.price}
                 author={book.author}
                 discount={book.discount}
+                quantity={book.quantity}
             />
           </div>
       )}

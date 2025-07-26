@@ -122,7 +122,7 @@ export const OrderList = () => {
   return (
     <>
       <Breadcrumb pageName='Danh sách đơn hàng' />
-      <div className="flex flex-wrap items-center gap-4 mb-6 p-4 bg-white rounded-xl shadow-md">
+      <div className="flex flex-wrap items-center gap-4 mb-6 p-4 rounded-xl shadow-md">
         <div className="relative flex-1 min-w-[250px]">
           <FileText
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
@@ -190,7 +190,7 @@ export const OrderList = () => {
           <div className="max-w-full overflow-x-auto">
             <table className="w-full table-auto text-left">
               <thead>
-                <tr className="bg-gray-100 text-gray-700">
+                <tr>
                   <th className="py-4 px-6 font-semibold">STT</th>
                   <td className="py-4 px-6 font-semibold">Mã đơn hàng</td>
                   <th className="py-4 px-6 font-semibold">Họ tên</th>

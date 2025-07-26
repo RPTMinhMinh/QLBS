@@ -63,14 +63,11 @@ const ProductDetails = () => {
       };
   
       if (review.id) {
-        // Nếu có review.id, đây là cập nhật đánh giá
         await updateReview(req, review.id);
       } else {
-        // Nếu không có review.id, đây là thêm đánh giá mới
         await createReview(req);
       }
   
-      // Cập nhật lại danh sách đánh giá
       reviewData();
     } catch (error) {
       console.error("Lỗi khi lưu đánh giá:", error);
@@ -131,7 +128,6 @@ const ProductDetails = () => {
                       className="border p-6 rounded-lg shadow-lg bg-white transition-transform duration-300 hover:scale-105 relative"
                     >
                       <div className="flex items-center mb-4">
-                        {/* Avatar + Tên người đánh giá */}
                         <img
                           src={review.imageUrl || "/default-avatar.png"}
                           alt={review.accountName}
@@ -145,7 +141,6 @@ const ProductDetails = () => {
                         </div>
                       </div>
 
-                      {/* Số sao */}
                       <div className="flex items-center mb-2">
                         {Array.from({ length: 5 }).map((_, index) => (
                           <FaStar
@@ -157,10 +152,8 @@ const ProductDetails = () => {
                         <span className="ml-2 text-gray-600 text-sm">({review.rating}/5)</span>
                       </div>
 
-                      {/* Nội dung đánh giá */}
                       <p className="text-gray-700 mt-2">{review.comment}</p>
 
-                      {/* Nút Sửa và Xóa bên phải */}
                       <div className="absolute right-4 top-4 flex gap-2">
                         <button
                           onClick={() => handleOpenPopup(review)}

@@ -70,6 +70,7 @@ const BestSellers = () => {
                   price={book.price}
                   author={book.author}
                   discount={book.discount}
+                  quantity={book.quantity}
               />
             </div>
         )}

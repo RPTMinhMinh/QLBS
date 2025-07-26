@@ -173,7 +173,7 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
       </div>
 
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-end mt-4 dark:fill-white">
         <div className="relative inline-block text-right">
           <select
             value={selectedOption}

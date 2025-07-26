@@ -1,7 +1,7 @@
 import React from "react";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { GiReturnArrow } from "react-icons/gi";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaStop, FaStopCircle } from "react-icons/fa";
 import { MdOutlineLabelImportant } from "react-icons/md";
 import Image from "../../designLayouts/Image";
 import Badge from "./Badge";
@@ -9,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { formatPrice } from "../../../constants/constant";
 import { addWishlist } from "../../../service/AccountService";
-import { ToastContainer, toast } from 'react-toastify'; // Import thư viện
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCart } from "../../../redux/CartContext";
+import { Eye, Heart, ShoppingCart, XCircle } from "lucide-react";
 
 const Product = ({ id, name, imageUrl, price, author, discount, quantity }) => {
   const dispatch = useDispatch();
@@ -19,10 +20,8 @@ const Product = ({ id, name, imageUrl, price, author, discount, quantity }) => {
   const token = localStorage.getItem('token');
   const { addCartItem } = useCart();
 
-  // Tính toán giá đã giảm
   const discountedPrice = discount ? price * (1 - discount / 100) : price;
 
-  // Xử lý xem chi tiết sản phẩm
   const handleProductDetails = (id) => {
     navigate(`/product/${id}`)
   };
@@ -65,27 +64,34 @@ const Product = ({ id, name, imageUrl, price, author, discount, quantity }) => {
           <div className="w-full h-32 absolute bg-white -bottom-[130px] group-hover:bottom-0 duration-700">
             <ul className="w-full h-full flex flex-col items-end justify-center gap-2 font-titleFont px-2 border-l border-r">
 
-              {quantity > 0 && (
+              {quantity > 0 ? (
                   <li
                       onClick={() => handleAddToCart()}
-                      className="hover:text-primeColor text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
+                      className="text-black hover:text-primeColor hover:scale-105 decoration-2 transition-all text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
                   >
                     Thêm vào giỏ hàng
-                    <FaShoppingCart/>
+                    <ShoppingCart className="w-4 h-4 mr-1"/>
+                  </li>
+              ) : (
+                <li
+                      className="text-sm text-red-500 flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
+                  >
+                    Hết hàng
+                    <XCircle className="w-4 h-4 mr-1"/>
                   </li>
               )}
               <li
                   onClick={() => handleProductDetails(id)}
-                  className="hover:text-primeColor text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
+                  className="text-black hover:text-primeColor hover:scale-105 decoration-2 transition-all text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full"
               >
                 Xem chi tiết
-                <MdOutlineLabelImportant/>
+                <Eye className="w-4 h-4 mr-1"/>
               </li>
               <li
                   onClick={() => handleAddToWishlist(id)}
-                  className="hover:text-primeColor text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full">
+                  className="text-black hover:text-primeColor hover:scale-105 decoration-2 transition-all text-sm flex items-center justify-end gap-2 cursor-pointer pb-1 duration-300 w-full">
                 Yêu thích
-                <BsSuitHeartFill/>
+                <Heart className="w-4 h-4 mr-1"/>
               </li>
             </ul>
           </div>

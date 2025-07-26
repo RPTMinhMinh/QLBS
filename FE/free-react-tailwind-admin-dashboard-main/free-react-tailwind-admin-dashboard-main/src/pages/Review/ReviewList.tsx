@@ -60,7 +60,7 @@ export const ReviewList = () => {
           <div className="max-w-full overflow-x-auto">
             <table className="w-full table-auto text-left">
               <thead>
-                <tr className="bg-gray-100 text-gray-700">
+                <tr>
                   <th className="py-4 px-6 font-semibold">STT</th>
                   <th className="py-4 px-6 font-semibold">Tên sách</th>
                   <th className="py-4 px-6 font-semibold">Số sao</th>

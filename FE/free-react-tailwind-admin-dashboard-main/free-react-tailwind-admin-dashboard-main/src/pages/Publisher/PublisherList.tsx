@@ -104,7 +104,7 @@ export const PublisherList = () => {
           <div className="max-w-full overflow-x-auto">
             <table className="w-full table-auto text-left">
               <thead>
-                <tr className="bg-gray-100 text-gray-700">
+                <tr>
                   <th className="py-4 px-6 font-semibold">STT</th>
                   <td className="py-4 px-6 font-semibold">Mã NXB</td>
                   <th className="py-4 px-6 font-semibold">Tên NXB</th>

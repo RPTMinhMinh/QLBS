@@ -37,7 +37,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> request
-                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/auth/**", "/auth/resend").permitAll()
 //                        .requestMatchers("/api/account/**").permitAll()
                                 .requestMatchers("api/book/list", "api/book/findById/**", "api/book/findByCondition", "api/book/findByBookName", "api/book/best-seller", "api/book/new-arrived", "api/book/special-offer").permitAll()
                                 .requestMatchers("api/book/create", "api/book/update/**", "api/book/delete/**", "api/book//count-book").hasAnyRole("ADMIN")
@@ -119,6 +119,6 @@ public class WebSecurityConfig {
 
     public static void main(String[] args) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println(passwordEncoder.encode("test"));
+        System.out.println(passwordEncoder.encode("useruser"));
     }
 }
