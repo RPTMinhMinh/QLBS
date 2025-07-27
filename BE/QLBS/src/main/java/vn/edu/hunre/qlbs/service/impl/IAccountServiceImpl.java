@@ -80,7 +80,6 @@ public class IAccountServiceImpl implements IAccountService {
         }
         AccountEntity account = accountEntity.get();
         account.setFullname(accountRequest.getFullname());
-        account.setAddress(accountRequest.getAddress());
         account.setPhone(accountRequest.getPhone());
         Set<RoleEntity> roleEntities = new HashSet<>();
         for (Long roleId: accountRequest.getRoleId()){

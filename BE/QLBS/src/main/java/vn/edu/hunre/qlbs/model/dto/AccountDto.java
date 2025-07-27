@@ -7,7 +7,6 @@ public class AccountDto {
     private String fullname;
     private String email;
     private String phone;
-    private String address;
     private boolean enabled;
     private Boolean loyalCustomer;
     private Set<RoleDto> roles;
@@ -69,14 +68,6 @@ public class AccountDto {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public boolean isEnabled() {

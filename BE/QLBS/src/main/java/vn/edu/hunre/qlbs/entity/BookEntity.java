@@ -17,6 +17,7 @@ public class BookEntity extends AbstractEntity{
     private Double importPrice;
     private Integer quantity;
     private Double discount;
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne

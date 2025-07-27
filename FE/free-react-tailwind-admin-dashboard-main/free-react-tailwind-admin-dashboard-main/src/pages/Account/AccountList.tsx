@@ -1,4 +1,4 @@
-import { FileText, List, Pencil, Phone, RefreshCcw, Search, Tag, Trash2, User } from 'lucide-react';
+import { FileText, Pencil, RefreshCcw, Search, Tag, Trash2, User } from 'lucide-react';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb'
 import { useEffect, useState } from 'react';
 import { Account } from '../../types/Account';
@@ -114,7 +114,6 @@ export const AccountList = () => {
       const formData = new FormData();
       formData.append("fullname", data.fullname);
       formData.append("phone", data.phone);
-      formData.append("address", data.address);
       selectedRoles.forEach(roleId => formData.append("roleId", roleId.toString()));
       if (file) {
         formData.append("file", file);
@@ -206,7 +205,6 @@ export const AccountList = () => {
                   <th className="py-4 px-6 font-semibold">Họ tên</th>
                   <th className="py-4 px-6 font-semibold">Email</th>
                   <th className="py-4 px-6 font-semibold">SDT</th>
-                  <th className="py-4 px-6 font-semibold">Địa chỉ</th>
                   <th className="py-4 px-6 font-semibold">Quyền</th>
                   <th className="py-4 px-6 font-semibold">Thao tác</th>
                 </tr>
@@ -226,7 +224,6 @@ export const AccountList = () => {
                     <td className="py-4 px-6">{account.fullname}</td>
                     <td className="py-4 px-6">{account.email}</td>
                     <td className="py-4 px-6">{account.phone}</td>
-                    <td className="py-4 px-6">{account.address}</td>
                     <td className="py-4 px-6">{account.roles.map((item) => item.name)}</td>
                     <td className="py-4 px-4 flex gap-4 mt-8">
                       <button className="text-yellow-600 hover:text-yellow-800 transition">
@@ -293,21 +290,9 @@ export const AccountList = () => {
                   className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                 />
               </div>
-
-
             </div>
 
             <div className="mb-4 flex gap-4">
-              <div className="w-1/2">
-                <label className="block text-gray-700 font-medium">Địa chỉ</label>
-                <input
-                  value={data?.address}
-                  onChange={(e) => setData((prev) => prev ? { ...prev, address: e.target.value } : prev)}
-                  type="text"
-                  name="address"
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                />
-              </div>
               <div className="w-1/2">
                 <label className="block text-gray-700 font-medium">
                   Số điện thoại

@@ -9,7 +9,6 @@ export const Profile = () => {
         email: '',
         fullname: '',
         phone: '',
-        address: '',
         imageUrl: '',
         roleIds: [],
     });
@@ -55,7 +54,6 @@ export const Profile = () => {
                 const formData = new FormData();
                 formData.append("fullname", data.fullname);
                 formData.append("phone", data.phone);
-                formData.append("address", data.address);
                 data.roleIds.forEach((role) => {
                     formData.append("roleId", role);
                 });
@@ -112,17 +110,6 @@ export const Profile = () => {
                                             name="fullname"
                                             value={data.fullname}
                                             onChange={(e) => setData({ ...data, fullname: e.target.value })}
-                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700">Địa chỉ</label>
-                                        <input
-                                            type="text"
-                                            name="address"
-                                            value={data.address}
-                                            onChange={(e) => setData({ ...data, address: e.target.value })}
                                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                                             required
                                         />

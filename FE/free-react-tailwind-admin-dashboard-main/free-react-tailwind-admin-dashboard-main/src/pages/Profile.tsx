@@ -21,7 +21,6 @@ const Profile = () => {
     fullname: '',
     email: '',
     phone: '',
-    address: '',
     roles: [],
     imageUrl: ''
   });
@@ -116,7 +115,6 @@ const Profile = () => {
       const formData = new FormData();
       formData.append("fullname", data.fullname);
       formData.append('phone', data.phone);
-      formData.append('address', data.address);
       selectedRoles.forEach((roleId) =>
         formData.append('roleId', roleId.toString()),
       );
@@ -225,22 +223,6 @@ const Profile = () => {
                         type="email"
                         value={data.email}
                         disabled
-                      />
-                    </div>
-                    <div>
-                      <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                        <FaPhone className="inline-block mr-2" /> Địa chỉ
-                      </label>
-                      <input
-                        className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none dark:border-form-strokedark dark:bg-form-input dark:text-white disabled:text-gray-500"
-                        type="text"
-                        value={data.address}
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          setData((prev) =>
-                            prev ? { ...prev, address: value } : prev,
-                          );
-                        }}
                       />
                     </div>
                   </div>

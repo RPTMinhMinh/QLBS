@@ -147,7 +147,7 @@ const Payment = () => {
               <input
                 type="text"
                 value={user?.fullname || ""}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
                 readOnly
               />
             </div>
@@ -156,16 +156,7 @@ const Payment = () => {
               <input
                 type="email"
                 value={user?.email || ""}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
-                readOnly
-              />
-            </div>
-            <div className="grid grid-cols-1 gap-y-1">
-              <label className="block text-sm font-medium text-gray-700">Địa chỉ</label>
-              <input
-                type="text"
-                value={user?.address || ""}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
                 readOnly
               />
             </div>
@@ -174,7 +165,7 @@ const Payment = () => {
               <input
                 type="text"
                 value={user?.phone || ""}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
                 readOnly
               />
             </div>
@@ -184,7 +175,7 @@ const Payment = () => {
                 type="text"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"
               />
             </div>
           </div>

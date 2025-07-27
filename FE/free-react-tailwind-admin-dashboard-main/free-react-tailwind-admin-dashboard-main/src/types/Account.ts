@@ -5,7 +5,6 @@ export interface Account {
     fullname:string,
     email:string,
     phone:string,
-    address:string,
     roles:Role[],
     imageUrl:string
 }

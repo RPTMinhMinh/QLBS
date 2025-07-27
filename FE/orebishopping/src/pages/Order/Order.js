@@ -88,39 +88,42 @@ export const Order = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {orders.map((order, index) => (
-                <tr key={order.id}>
-                  <td className="px-6 py-4 whitespace-nowrap flex justify-center items-center">
-                    {index + 1 + currentPage * items}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {order.code}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {order.createDate}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {order.address}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <tr key={order.id}>
+                    <td className="px-6 py-4 whitespace-nowrap flex justify-center items-center">
+                      {index + 1 + currentPage * items}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {order.code}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {new Date(order.createDate).toLocaleDateString()}
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {order.address}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
                     <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${order.status === 'Đã giao hàng'
-                        ? 'bg-green-100 text-green-800'
-                        : order.status === 'Đang giao hàng'
-                          ? 'bg-blue-100 text-blue-800'
-                          : order.status === 'Chờ xác nhận'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : order.status === 'Chờ lấy hàng'
-                              ? 'bg-orange-100 text-orange-800'
-                              : 'bg-red-100 text-red-800'
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${order.status
+                        === 'Đã giao hàng'
+                            ? 'bg-green-100 text-green-800'
+                            : order.status === 'Đang giao hàng'
+                                ? 'bg-blue-100 text-blue-800'
+                                : order.status === 'Chờ xác nhận'
+                                    ? 'bg-yellow-100 text-yellow-800'
+                                    : order.status === 'Chờ lấy hàng'
+                                        ? 'bg-orange-100 text-orange-800'
+                                        : 'bg-red-100 text-red-800'
                         }`}
                     >
                       {order.status}
                     </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <MdRemoveRedEye onClick={() => handleViewDetail(order.id)} className="h-5 w-5 mr-2" /> {/* Icon từ react-icons */}
-                  </td>
-                </tr>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <MdRemoveRedEye onClick={() => handleViewDetail(order.id)}
+                                      className="h-5 w-5 mr-2"/> {/* Icon từ react-icons */}
+                    </td>
+                  </tr>
               ))}
             </tbody>
           </table>
@@ -237,12 +240,16 @@ export const Order = () => {
               {/* Hiển thị tổng tiền */}
               <div className="mt-4 flex justify-end">
                 <span className="text-lg">
-                  Tổng tiền: {orderDetail && formatPrice(orderDetail.reduce((acc, item) => acc + item.price, 0) + 30000)}
+                  Tổng tiền: <span className="font-bold">
+                    {orderDetail && formatPrice(
+                        orderDetail.reduce((acc, item) => acc + item.price, 0) + 30000)}
+                  </span>
                 </span>
+
               </div>
               <button
-                onClick={closeModal}
-                className="mt-4 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+                  onClick={closeModal}
+                  className="mt-4 px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
               >
                 Đóng
               </button>

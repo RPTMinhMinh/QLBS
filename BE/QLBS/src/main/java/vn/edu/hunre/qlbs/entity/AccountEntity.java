@@ -13,7 +13,6 @@ public class AccountEntity extends AbstractEntity {
     private String email;
     private String password;
     private String phone;
-    private String address;
     private boolean enabled;
     private Boolean loyalCustomer;
 
@@ -99,14 +98,6 @@ public class AccountEntity extends AbstractEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public boolean isEnabled() {

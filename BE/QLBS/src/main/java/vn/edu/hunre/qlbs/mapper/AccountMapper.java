@@ -23,7 +23,6 @@ public class AccountMapper {
         dto.setFullname(userEntity.getFullname());
         dto.setPhone(userEntity.getPhone());
         dto.setEmail(userEntity.getEmail());
-        dto.setAddress(userEntity.getAddress());
         dto.setEnabled(userEntity.isEnabled());
         dto.setRoles(userEntity.getRoles()
                 .stream()

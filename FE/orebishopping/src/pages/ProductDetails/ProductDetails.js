@@ -103,8 +103,7 @@ const ProductDetails = () => {
             <div className="w-full col-span-full mt-8">
               <h3 className="text-2xl font-semibold mb-6 border-b pb-2">Bình luận</h3>
               {
-                check ==
-                true && hasReview === false && (
+                check == true && hasReview === false && (
                   <button
                     onClick={() => handleOpenPopup()}
                     className="px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white font-semibold shadow-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -154,22 +153,22 @@ const ProductDetails = () => {
 
                       <p className="text-gray-700 mt-2">{review.comment}</p>
 
-                      <div className="absolute right-4 top-4 flex gap-2">
-                        <button
-                          onClick={() => handleOpenPopup(review)}
-                          className="text-blue-500 hover:text-blue-700 flex items-center gap-1"
-                        >
-                          <FaEdit className="w-4 h-4" />
-                          Sửa
-                        </button>
-                        <button
-                          onClick={() => handleDeleteReview(review.id)}
-                          className="text-red-500 hover:text-red-700 flex items-center gap-1"
-                        >
-                          <FaTrashAlt className="w-4 h-4" />
-                          Xóa
-                        </button>
-                      </div>
+                      {/*<div className="absolute right-4 top-4 flex gap-2">*/}
+                      {/*  <button*/}
+                      {/*    onClick={() => handleOpenPopup(review)}*/}
+                      {/*    className="text-blue-500 hover:text-blue-700 flex items-center gap-1"*/}
+                      {/*  >*/}
+                      {/*    <FaEdit className="w-4 h-4" />*/}
+                      {/*    Sửa*/}
+                      {/*  </button>*/}
+                      {/*  <button*/}
+                      {/*    onClick={() => handleDeleteReview(review.id)}*/}
+                      {/*    className="text-red-500 hover:text-red-700 flex items-center gap-1"*/}
+                      {/*  >*/}
+                      {/*    <FaTrashAlt className="w-4 h-4" />*/}
+                      {/*    Xóa*/}
+                      {/*  </button>*/}
+                      {/*</div>*/}
                     </li>
                   ))}
                 </ul>
